@@ -5,16 +5,15 @@
 
 Summary:	A Single Sign On Authentication module for Apache
 Name:		apache-%{mod_name}
-Version:	2.2.0
-Release:	%mkrel 12
+Version:	2.2.2
+Release:	%mkrel 1
 Group:		System/Servers
 License:	GPL
 URL:		http://www.inl.fr/mod-auth-nufw.html
 Source0:	http://www.inl.fr/download/mod_auth_nufw-%{version}.tar.bz2
 Source1:	%{mod_conf}.bz2
 Patch0:		mod_auth_nufw-2.0-aprfix.diff
-Patch1:		mod_auth_nufw-2.0-fpic.diff
-Patch2:		mod_auth_nufw-2.2.0-apache220.diff
+Patch2:		mod_auth_nufw-2.2.2-apache22.diff
 Requires(pre): rpm-helper
 Requires(postun): rpm-helper
 Requires(pre):	apache-conf >= 2.0.54
@@ -42,8 +41,7 @@ users network activity.
 
 %setup -q -n mod_auth_nufw-%{version}
 %patch0 -p0
-%patch1 -p0
-%patch2 -p1
+%patch2 -p0
 
 find . -type d -perm 0700 -exec chmod 755 {} \;
 find . -type d -perm 0555 -exec chmod 755 {} \;
@@ -74,11 +72,9 @@ mv mod_auth_nufw.c mod_authn_nufw.c
 libtoolize --copy --force; aclocal-1.7; autoconf
 
 %configure2_5x --localstatedir=/var/lib \
-    --with-apxs=%{_sbindir}/apxs \
     --with-apache22 \
     --with-mysql \
-    --with-ldap-uids \
-    --with-ldap-uids-cache
+    APXS=%{_sbindir}/apxs
 
 %make
 
@@ -108,6 +104,6 @@ fi
 
 %files
 %defattr(-,root,root)
-%doc NOTICE PLANS UPGRADING doc/*
+%doc NOTICE PLANS README doc/*
 %attr(0644,root,root) %config(noreplace) %{_sysconfdir}/httpd/modules.d/%{mod_conf}
 %attr(0755,root,root) %{_libdir}/apache-extramodules/%{mod_so}
