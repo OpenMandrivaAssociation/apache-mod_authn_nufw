@@ -6,7 +6,7 @@
 Summary:	A Single Sign On Authentication module for Apache
 Name:		apache-%{mod_name}
 Version:	2.2.2
-Release:	%mkrel 5
+Release:	%mkrel 6
 Group:		System/Servers
 License:	GPL
 URL:		http://www.inl.fr/mod-auth-nufw.html
@@ -25,7 +25,7 @@ BuildRequires:  openldap-devel
 BuildRequires: 	mysql-devel
 BuildRequires:	file
 BuildRequires:	autoconf2.5
-BuildRequires:	automake1.7
+BuildRequires:	automake
 BuildRequires:	libtool
 BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-buildroot
 
@@ -69,7 +69,7 @@ mv mod_auth_nufw.c mod_authn_nufw.c
 
 %build
 
-libtoolize --copy --force; aclocal-1.7; autoconf
+libtoolize --copy --force; aclocal; autoconf
 
 %configure2_5x --localstatedir=/var/lib \
     --with-apache22 \
