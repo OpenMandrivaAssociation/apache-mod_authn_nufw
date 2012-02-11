@@ -6,7 +6,7 @@
 Summary:	A Single Sign On Authentication module for Apache
 Name:		apache-%{mod_name}
 Version:	2.2.2
-Release:	%mkrel 8
+Release:	%mkrel 9
 Group:		System/Servers
 License:	GPL
 URL:		http://www.inl.fr/mod-auth-nufw.html
