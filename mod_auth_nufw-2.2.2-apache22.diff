@@ -1,0 +1,26 @@
+--- configure.in	2008-11-06 15:27:54.000000000 +0100
++++ configure.in.dlucio	2010-03-07 05:03:45.000000000 +0100
+@@ -1,4 +1,4 @@
+-AC_INIT(mod_auth_nufw.c)
++AC_INIT(mod_authn_nufw.c)
+ 
+ AC_PROG_CC
+ 
+@@ -31,7 +31,7 @@
+ 
+ case $target in
+     *aix*)
+-	AIX_EXP=mod_auth_nufw.exp
++	AIX_EXP=mod_authn_nufw.exp
+ 	AIX_LDFLAGS_SHLIB=-bE:`echo $@|sed -e 's:\.so$$:.exp:'`
+ 	;;
+ esac
+@@ -52,7 +52,7 @@
+    AC_MSG_RESULT(yes)
+ else
+    AC_MSG_RESULT(no)
+-   AC_MSG_ERROR(Cannot build mod_auth_nufw without a valid apxs program)
++   AC_MSG_ERROR(Cannot build mod_authn_nufw without a valid apxs program)
+ fi
+ 
+ #LDFLAGS="/mnt/divx/apache/apache_1.3.29/src/ap/libap.a /mnt/divx/apache/apache_1.3.29/src/main/libmain.a $LDFLAGS"

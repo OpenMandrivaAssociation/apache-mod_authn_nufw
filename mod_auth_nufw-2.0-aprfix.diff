@@ -1,0 +1,67 @@
+--- Makefile.in	2008-11-05 19:24:30.000000000 +0100
++++ Makefile.in.dlucio	2010-03-07 17:56:14.000000000 +0100
+@@ -1,33 +1,33 @@
+ # $Id: Makefile.in,v 1.9 2001/07/04 14:37:55 dave Exp $
+ 
+ # Copyright (C), 1999-2001 Dave Carrigan
+-# Hacked into by Vincent Deffontaines - 2004 to build mod_auth_nufw.
++# Hacked into by Vincent Deffontaines - 2004 to build mod_authn_nufw.
+ 
+ #Anyone unhappy about this Makefile, please complain to apxs authors !!!!
+ 
+ LIBS=@LIBS@
+-CPPFLAGS=@CPPFLAGS@
++CPPFLAGS=@CPPFLAGS@ `apr-config --cppflags`
+ DB_TYPE_MYSQL=@DB_TYPE_MYSQL@
+ APXS=@APXS@
+ AIX_EXP=@AIX_EXP@
+ AIX_LDFLAGS_SHLIB=@AIX_LDFLAGS_SHLIB@
+ MYCC=@MYCC@
+ 
+-all: mod_auth_nufw.so
++all: mod_authn_nufw.so
+ 
+ #html: FAQ.html Changes.html auth_ldap.html
+ 
+-OBJS=mod_auth_nufw.o mod_auth_nufw_sql.o
++OBJS=mod_authn_nufw.o mod_auth_nufw_sql.o
+ 
+ 
+ CFLAGS=`$(APXS) -q CFLAGS` -fPIC
+ CFLAGS_SHLIB=`$(APXS) -q CFLAGS_SHLIB` 
+-INCLUDEDIR=`$(APXS) -q INCLUDEDIR`
++INCLUDEDIR=`$(APXS) -q INCLUDEDIR` `apr-config --includes`
+ EXTRA_LDFLAGS=@LDFLAGS@
+ LD_SHLIB=`$(APXS) -q LD_SHLIB`
+ LDFLAGS_SHLIB=$(EXTRA_LDFLAGS) `$(APXS) -q LDFLAGS_SHLIB` $(AIX_LDFLAGS_SHLIB)
+ 
+-mod_auth_nufw.so: $(OBJS) $(AIX_EXP)
++mod_authn_nufw.so: $(OBJS) $(AIX_EXP)
+ #	$(LD_SHLIB) $(LDFLAGS_SHLIB) -o $@ $(OBJS) $(LIBS)
+ #	@$(LD_SHLIB) $(LDFLAGS_SHLIB) -o $@ $(OBJS) $(LIBS) 
+ 	$(MYCC) -shared -o $@ $(OBJS) $(LIBS)
+@@ -47,8 +47,8 @@
+ 	cd .. && tar cvzf $$tar $$dirname/ --exclude-from=/tmp/excl.$$$$; \
+ 	rm -f /tmp/excl.$$$$
+ 
+-install: mod_auth_nufw.so
+-	$(APXS) -n auth_nufw -i mod_auth_nufw.so
++install: mod_authn_nufw.so
++	$(APXS) -n authn_nufw -i mod_authn_nufw.so
+ 
+ clean:
+ 	rm -f *.so *.o *~ core $(AIX_EXP) TAGS 
+@@ -57,10 +57,10 @@
+ 	rm -f Makefile config.status config.cache config.log
+ 
+ $(AIX_EXP):
+-	@echo mod_auth_nufw_module > $@
++	@echo mod_authn_nufw_module > $@
+ 
+-mod_auth_nufw.o: mod_auth_nufw.h
+-mod_auth_nufw_sql.o: mod_auth_nufw.h
++mod_authn_nufw.o: mod_auth_nufw.h
++mod_authn_nufw_sql.o: mod_auth_nufw.h
+ 
+ Makefile: Makefile.in
+ 	sh config.status
