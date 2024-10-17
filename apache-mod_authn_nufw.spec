@@ -9,7 +9,7 @@ Version:	2.2.2
 Release:	%mkrel 9
 Group:		System/Servers
 License:	GPL
-URL:		http://www.inl.fr/mod-auth-nufw.html
+URL:		https://www.inl.fr/mod-auth-nufw.html
 Source0:	http://www.inl.fr/download/mod_auth_nufw-%{version}.tar.bz2
 Source1:	%{mod_conf}.bz2
 Patch0:		mod_auth_nufw-2.0-aprfix.diff
