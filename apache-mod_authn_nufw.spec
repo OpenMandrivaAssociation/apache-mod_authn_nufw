@@ -20,6 +20,8 @@ Requires(pre):	apache-conf >= 2.0.54
 Requires(pre):	apache >= 2.0.54
 Requires:	apache-conf >= 2.0.54
 Requires:	apache >= 2.0.54
+BuildRequires:	libtool-base
+BuildRequires:	slibtool
 BuildRequires:  apache-devel >= 2.0.54
 BuildRequires:  openldap-devel
 BuildRequires: 	mysql-devel
